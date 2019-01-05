@@ -65,7 +65,13 @@ tcp_wrappers=YES|在VSFTPD中使用TCP_Wrappers远程访问控制机制，默认
 | #data_connection_timeout=120| 设定默认的数据连接超时时间 | 
 
 #### 修改配置文件
+###### 备份vsftpd.conf 
+      cd /etc/vsftpd
+      cp vsftpd.conf  vsftpd.conf.back
+      vi vsftpd.conf
+###### 修改vsftpd.conf
 
+ > 这里日后在补充......
 
 
 
