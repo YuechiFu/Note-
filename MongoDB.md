@@ -70,6 +70,16 @@ tcp_wrappers=YES|在VSFTPD中使用TCP_Wrappers远程访问控制机制，默认
 
 
 
+#### 创建帐号
+###### -创建用户 ftpuser 指定 `/home/vsftpd` 目录
+         useradd -g root -M -d /home/vsftpd -s /sbin/nologin ftpuser  
+###### -修改密码
+         passwd ftpuser 
+###### -把 /home/vsftpd 的所有权给ftpuser.root
+         chown -R ftpuser.root /home/vsftpd
+
+
+
 
 
 
