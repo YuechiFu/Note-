@@ -85,6 +85,10 @@ module.exports = {
 ### 实例
 
 ```javascript
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const entryPath = "./src/static/";
+const outputPath = path.resolve(__dirname, "./build");
 module.exports = {
   mode: "development",
   devServer: {
@@ -112,13 +116,17 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: entryPath + "index.html", //模板html文件
-      filename: "./bundle.html", // 打包后的文件
+      filename: "../bundle.html", // 打包后的文件
       title: "title",
       hash: true
     })
   ]
 };
 ```
+**要注意的是 htmlWebpackPlugin中的 filename 属性 的路径是 根据 output.path 来决定的**
+**上面 例子里的ouput.path 是 ./build/js**
+**所以此时的filename 应该是 "../bundle.html"**
+
 
 ### 参数介绍
 
