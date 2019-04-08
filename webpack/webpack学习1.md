@@ -101,8 +101,8 @@ module.exports = {
 
   /*  entry: entryPath + "js/main.js",
   output: {
-    path: path.resolve(outputPath, "js"),
-    filename: "bundle.main.js"
+    path: outputPath,
+    filename: "./js/bundle.main.js"
   }, */
   entry: [
     entryPath + "js/entry.01.js",
@@ -110,8 +110,8 @@ module.exports = {
     entryPath + "js/entry.03.js"
   ],
   output: {
-    path: path.resolve(outputPath, "js"),
-    filename: "bundle.entryAll.js"
+    path: outputPath
+    filename: "./js/bundle.entryAll.js"
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -123,11 +123,34 @@ module.exports = {
   ]
 };
 ```
-**要注意的是 htmlWebpackPlugin中的 filename 属性 的路径是 根据 output.path 来决定的**
-**上面 例子里的ouput.path 是 ./build/js**
-**所以此时的filename 应该是 "../bundle.html"**
+要注意的是 htmlWebpackPlugin中的 **filename** 属性 的路径是 根据 **output.path** 来决定的
 
+**上面 例子里的ouput.path 是 ./build**
 
+**所以此时的filename 应该是 "./bundle.html"**
+
+另外，以下这两种写法，虽然结果都是 **./build/js/bundle.entryAll.js **,
+
+但我们如果 在webpack-dev-server 按照第二种写法写， 此时 html-webpack-plugin 下的filename  理论上应该改成，**./bundle.html**
+
+打包后你就会发现，我们访问的时候  会显示 **not Get/** 这是因为，**ouput.path** 就已经决定了输出目录为 **./build/js**,
+
+而你的bundleIndex.html 是在 **./build**下。所以 server 不会去处理 ，所以当 html 和 js 不在同级目录下时 推荐 的一种写法 
+
+如果只是 ```npx webpack``` 去做静态打包，两种没有区别 
+
+```javascript
+output: {
+    path: outputPath
+    filename: "./js/bundle.entryAll.js"
+  },
+  
+  output: {
+    path: path.resolve(outputPath,"./js")
+    filename: "bundle.entryAll.js"
+  },
+
+```
 ### 参数介绍
 
 ##### title
