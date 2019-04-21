@@ -242,3 +242,70 @@ vi vsftpd.conf
 | dirmessage_enable=YES                        | 允许为目录配置显示信息，显示每个目录下面的 message_file 文件的内容                                                                                                                                                                                                                                     |
 | #idle_session_timeout=600                    | 可以设定默认的空闲超时时间，用户超过这段时间不动作将被服务器踢出                                                                                                                                                                                                                                       |
 | #data_connection_timeout=120                 | 设定默认的数据连接超时时间                                                                                                                                                                                                                                                                             |
+
+## 一键搭建 ss(以前的方法)
+
+```
+wget --no-check-certificate HYPERLINK "https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh"
+
+//或者
+
+git clone https://github.com/YuechiFu/vpn.git
+
+
+chmod +x shadowsocks-libev.sh
+
+./shadowsocks-libev.sh 2>&1 | tee shadowsocks-libev.log
+
+
+
+
+//查看是否安装成功
+
+ps -ef | grep ss-server | grep -v ps | grep -v grep
+
+
+//启动ss
+
+service shadowsocks start
+
+
+//停止ss
+
+service shadowsocks stop
+
+
+//重启ss
+
+shadowsocks restart
+
+
+//更改 shadowsock 的配置
+
+vi /etc/shadowsocks-libev/config.json
+```
+
+## centos 一键搭建 L2TP 服务器
+
+```
+wget --no-check-certificate HYPERLINK HYPERLINK "https://raw.githubusercontent.com/teddysun/across/master/l2tp.sh"
+
+//或者
+
+git clone https://github.com/YuechiFu/vpn.git
+
+
+chmod +x l2tp.sh
+
+./l2tp.sh
+
+
+//验证
+
+ipsec setup restart
+
+xl2tpd -D
+
+ipsec verify
+
+```
